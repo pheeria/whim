@@ -4,8 +4,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "node index"
+  },
   "dependencies": {
-    "express": "^4.16.4",
-    "unsplash-js": "^5.0.0"
+    "axios": "^0.18.0",
+    "express": "^4.16.4"
   }
 }
