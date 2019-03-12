@@ -11,18 +11,29 @@ fs.readFile("./adjectives.json", (err, data) => {
   words = adjectives.words;
 });
 
-app.get("/", (req, res) => {
+const getRandomWord = () => {
   let index = Math.floor(Math.random() * words.length) + 1;
-  let word = words[index];
-  unsplash
-    .get(`search/photos?query=${word}&orientation=squarish`)
-    .then(response => {
-      const imgs = [`<h1>${word}</h1>`];
-      response.data.results.forEach(element => {
-        imgs.push(`<img src=${element.urls.small} />`);
+  return words[index];
+};
+
+app.get("/", async (req, res) => {
+  const imgs = [];
+  while (true) {
+    const word = getRandomWord();
+    imgs.push(`<h1>${word}</h1>`);
+    const fromUnsplash = await unsplash.get(
+      `search/photos?query=${word}&orientation=squarish`
+    );
+
+    if (fromUnsplash.data.total) {
+      fromUnsplash.data.results.forEach(element => {
+        imgs.push(
+          `<img src="${element.urls.small}" title="By ${element.user.name}"/>`
+        );
       });
       res.send(imgs.join(" "));
-    });
+    }
+  }
 });
 
 app.get("/:word", (req, res) => {
@@ -31,7 +42,9 @@ app.get("/:word", (req, res) => {
     .then(response => {
       const imgs = [];
       response.data.results.forEach(element => {
-        imgs.push(`<img src=${element.urls.small} />`);
+        imgs.push(
+          `<img src="${element.urls.small}" title="By ${element.user.name}"/>`
+        );
       });
       res.send(imgs.join(" "));
     });
