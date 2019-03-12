@@ -3,7 +3,7 @@ const secrets = require("./secrets");
 
 const unsplash = axios.create({
   baseURL: secrets.unsplash.api,
-  timeout: 1000,
+  timeout: 3000,
   headers: { Authorization: `Client-ID ${secrets.unsplash.appId}` }
 });
 
