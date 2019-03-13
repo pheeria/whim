@@ -21,9 +21,7 @@ app.get("/", async (req, res) => {
   while (true) {
     const word = getRandomWord();
     imgs.push(`<h1>${word}</h1>`);
-    const fromUnsplash = await unsplash.get(
-      `search/photos?query=${word}&orientation=squarish`
-    );
+      const fromUnsplash = await unsplash.get(`search/photos?query=${word}`);
 
     if (fromUnsplash.data.total) {
       fromUnsplash.data.results.forEach(element => {
@@ -37,9 +35,7 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/:word", (req, res) => {
-  unsplash
-    .get(`search/photos?query=${req.params.word}&orientation=squarish`)
-    .then(response => {
+  unsplash.get(`search/photos?query=${req.params.word}`).then(response => {
       const imgs = [];
       response.data.results.forEach(element => {
         imgs.push(
