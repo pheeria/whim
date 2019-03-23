@@ -1,8 +1,10 @@
 const express = require("express");
+const cors = require("cors");
 const { unsplash } = require("./unsplash");
 const fs = require("fs");
 
 const app = express();
+app.use(cors());
 let words = [];
 
 fs.readFile("./adjectives.json", (err, data) => {
