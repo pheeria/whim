@@ -7,38 +7,27 @@ const Whim = () => {
     setAnswer(e.target.value);
   };
   const onClick = e => console.log(answer);
+  const fromServer = {
+    options: [
+      "https://images.unsplash.com/photo-1520548568350-fab9b9ebc923?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjYwODEwfQ",
+      "https://images.unsplash.com/photo-1503467262827-9c70e78ac329?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjYwODEwfQ",
+      "https://images.unsplash.com/photo-1522726832281-362409683a2d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjYwODEwfQ",
+      "https://images.unsplash.com/photo-1548777123-b54e9310e1bf?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjYwODEwfQ"
+    ],
+    keyword: "far",
+    answer: 0
+  };
   return (
     <main>
-      <span>happy</span>
+      <span>{fromServer.keyword}</span>
       <span>14</span>
-      <label>
-        <input type="radio" name="answer" value="a" onChange={onChange} />
-        <img
-          alt=""
-          src="https://images.unsplash.com/photo-1516741247836-f66dfdfd1b22?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjYwODEwfQ"
-        />
-      </label>
-      <label>
-        <input type="radio" name="answer" value="b" onChange={onChange} />
-        <img
-          alt=""
-          src="https://images.unsplash.com/photo-1485110168560-69d4ac37b23e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjYwODEwfQ"
-        />
-      </label>
-      <label>
-        <input type="radio" name="answer" value="x" onChange={onChange} />
-        <img
-          alt=""
-          src="https://images.unsplash.com/photo-1520572218395-c61280bb73ae?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjYwODEwfQ"
-        />
-      </label>
-      <label>
-        <input type="radio" name="answer" value="y" onChange={onChange} />
-        <img
-          alt=""
-          src="https://images.unsplash.com/photo-1481608790904-6b47c88e5b00?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjYwODEwfQ"
-        />
-      </label>
+
+      {[0, 1, 2, 3].map(i => (
+        <label>
+          <input type="radio" name="answer" value={i} onChange={onChange} />
+          <img alt="" src={fromServer.options[i]} />
+        </label>
+      ))}
 
       <button onClick={onClick}>Check</button>
     </main>
