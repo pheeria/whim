@@ -4,7 +4,7 @@ export const setKeyword = keyword => ({
 });
 
 export const defineAnswer = answer => ({
-  type: "DEFINE_KEYWORD",
+  type: "DEFINE_ANSWER",
   payload: answer
 });
 
@@ -13,12 +13,15 @@ export const populateOptions = options => ({
   payload: options
 });
 
-export const queryNextQuestion = dispatch => {
-  fetch("https://localhost:4200/next").then(question => {
-    dispatch(setKeyword(question.keyword));
-    dispatch(defineAnswer(question.answer));
-    dispatch(populateOptions(question.options));
-  });
+export const queryNextQuestion = () => dispatch => {
+  fetch("http://localhost:4200/next")
+    .then(res => res.json())
+    .then(question => {
+      console.log(question);
+      dispatch(setKeyword(question.keyword));
+      dispatch(defineAnswer(question.answer));
+      dispatch(populateOptions(question.options));
+    });
 };
 
 export const incrementHighscore = () => ({

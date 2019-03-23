@@ -1,11 +1,11 @@
 import React from "react";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import Whim from "./Whim";
+import WhimContainer from "./WhimContainer";
 
 const App = () => (
   <Provider store={store}>
-    <Whim />
+    <WhimContainer />
   </Provider>
 );
 
