@@ -14,7 +14,7 @@ export const populateOptions = options => ({
 });
 
 export const queryNextQuestion = dispatch => {
-  fetch().then(question => {
+  fetch("https://localhost:4200/next").then(question => {
     dispatch(setKeyword(question.keyword));
     dispatch(defineAnswer(question.answer));
     dispatch(populateOptions(question.options));
