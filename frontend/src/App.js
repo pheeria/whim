@@ -1,44 +1,48 @@
-import React from "react";
-import { Button, Box, Grid, Grommet, Text } from "grommet";
-import { CirclePlay } from "grommet-icons";
+import React, { useState } from "react";
+import "./App.css";
 
-const App = () => (
-  <Grommet plain full>
-    <Grid fill gap="small" rows={["auto", "flex", "auto"]}>
-      <Grid fill columns={["auto", "flex", "auto"]}>
-        <Text alignSelf="start">happy</Text>
-        <Text> </Text>
-        <Text alignSelf="end">14</Text>
-      </Grid>
+const App = () => {
+  const [answer, setAnswer] = useState();
+  const onChange = e => {
+    setAnswer(e.target.value);
+  };
+  const onClick = e => console.log(answer);
+  return (
+    <main>
+      <span>happy</span>
+      <span>14</span>
+      <label>
+        <input type="radio" name="answer" value="a" onChange={onChange} />
+        <img
+          alt=""
+          src="https://images.unsplash.com/photo-1516741247836-f66dfdfd1b22?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjYwODEwfQ"
+        />
+      </label>
+      <label>
+        <input type="radio" name="answer" value="b" onChange={onChange} />
+        <img
+          alt=""
+          src="https://images.unsplash.com/photo-1485110168560-69d4ac37b23e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjYwODEwfQ"
+        />
+      </label>
+      <label>
+        <input type="radio" name="answer" value="x" onChange={onChange} />
+        <img
+          alt=""
+          src="https://images.unsplash.com/photo-1520572218395-c61280bb73ae?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjYwODEwfQ"
+        />
+      </label>
+      <label>
+        <input type="radio" name="answer" value="y" onChange={onChange} />
+        <img
+          alt=""
+          src="https://images.unsplash.com/photo-1481608790904-6b47c88e5b00?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjYwODEwfQ"
+        />
+      </label>
 
-      <Grid
-        rows={["auto", "auto"]}
-        columns={["auto", "auto"]}
-        gap="medium"
-        areas={[
-          { name: "a", start: [0, 0], end: [1, 0] },
-          { name: "b", start: [1, 0], end: [1, 1] },
-          { name: "x", start: [0, 1], end: [0, 1] },
-          { name: "y", start: [1, 1], end: [1, 1] }
-        ]}
-      >
-        <Box gridArea="a" background="brand">
-          a
-        </Box>
-        <Box gridArea="b" background="accent-1">
-          b
-        </Box>
-        <Box gridArea="x" background="accent-2">
-          x
-        </Box>
-        <Box gridArea="y" background="accent-4">
-          y
-        </Box>
-      </Grid>
-
-      <Button icon={<CirclePlay />} primary label="Check" onClick={() => {}} />
-    </Grid>
-  </Grommet>
-);
+      <button onClick={onClick}>Check</button>
+    </main>
+  );
+};
 
 export default App;
