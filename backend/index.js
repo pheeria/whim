@@ -1,22 +1,26 @@
 const express = require("express");
 const cors = require("cors");
 const { unsplash } = require("./unsplash");
+const { synonyms } = require("./synonyms");
 const fs = require("fs");
 
 const app = express();
 app.use(cors());
-let words = [];
 
-fs.readFile("./adjectives.json", (err, data) => {
-  if (err) throw err;
-  let adjectives = JSON.parse(data);
-  words = adjectives.words;
-});
+const getRandomWord = (() => {
+  let words = [];
 
-const getRandomWord = () => {
-  let index = Math.floor(Math.random() * words.length) + 1;
-  return words[index];
-};
+  fs.readFile("./adjectives.json", (err, data) => {
+    if (err) throw err;
+    let adjectives = JSON.parse(data);
+    words = adjectives.words;
+  });
+
+  return () => {
+    let index = Math.floor(Math.random() * words.length) + 1;
+    return words[index];
+  };
+})();
 
 app.get("/", async (req, res) => {
   const imgs = [];
