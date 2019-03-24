@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import "./Whim.css";
 
-const Whim = ({ answer, keyword, options, highscore, onNext }) => {
+const Whim = ({ answer, keyword, options, highscore, onNext, onSuccess }) => {
   const [guess, setGuess] = useState();
-  const onClick = e => console.log(guess + " " + answer);
+  const onClick = e => {
+    if (+guess === +answer) {
+      onSuccess();
+    }
+  };
   return (
     <main>
       <span>{keyword}</span>
