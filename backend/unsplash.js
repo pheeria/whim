@@ -3,11 +3,24 @@ const secrets = require("./secrets");
 
 const unsplash = axios.create({
   baseURL: secrets.unsplash.api,
-  timeout: 3000,
+  timeout: 10000,
   params: {
     orientation: "squarish"
   },
   headers: { Authorization: `Client-ID ${secrets.unsplash.appId}` }
 });
 
-module.exports = { unsplash };
+const getPhotos = async word => {
+  let result = [];
+  const fromUnsplash = await unsplash.get(`search/photos?query=${word}`);
+  for (let i = 0; i < fromUnsplash.data.results.length; i++) {
+    let picture = fromUnsplash.data.results[i];
+    result.push({
+      link: picture.urls.small,
+      author: picture.user.name
+    });
+  }
+  return result;
+};
+
+module.exports = { unsplash, getPhotos };
