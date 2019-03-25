@@ -23,4 +23,18 @@ const getPhotos = async word => {
   return result;
 };
 
-module.exports = { unsplash, getPhotos };
+const getThreeRandomPhotos = async () => {
+  let result = [];
+  const fromUnsplash = await unsplash.get(`/photos/random?count=3`);
+  console.log(fromUnsplash.data);
+  for (let i = 0; i < fromUnsplash.data.length; i++) {
+    let picture = fromUnsplash.data[i];
+    result.push({
+      link: picture.urls.small,
+      author: picture.user.name
+    });
+  }
+  return result;
+};
+
+module.exports = { unsplash, getPhotos, getThreeRandomPhotos };

@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const { unsplash, getPhotos } = require("./unsplash");
+const { unsplash, getPhotos, getThreeRandomPhotos } = require("./unsplash");
 const { getAntonyms } = require("./synonyms");
 const fs = require("fs");
 
@@ -58,7 +58,7 @@ app.get(
 );
 
 app.get(
-  "/next",
+  "/antonyms",
   asyncHandler(async (req, res) => {
     let result = {};
     while (true) {
@@ -88,6 +88,45 @@ app.get(
             let spamPicture = spamPictures[j];
             result.options.push(spamPicture.link);
           }
+        }
+
+        if (result.options.length === 4) {
+          shuffle(result.options);
+          result.answer = result.options.findIndex(o => o === picture.link);
+          break;
+        }
+      }
+    }
+    res.send(result);
+  })
+);
+
+app.get(
+  "/next",
+  asyncHandler(async (req, res) => {
+    let result = {};
+    while (true) {
+      const word = getRandomWord();
+      console.log(`Selected word: ${word}`);
+
+      result = { options: [], keyword: word, answer: 0 };
+
+      const secretPictures = await getPhotos(word);
+
+      if (secretPictures.length) {
+        const index = getRandomNumber(secretPictures.length);
+        let picture = secretPictures[index];
+        result.options.push(picture.link);
+
+        const spamPictures = await getThreeRandomPhotos();
+
+        for (
+          let j = 0;
+          j < spamPictures.length && result.options.length < 4;
+          j++
+        ) {
+          let spamPicture = spamPictures[j];
+          result.options.push(spamPicture.link);
         }
 
         if (result.options.length === 4) {

@@ -5,8 +5,9 @@ const Whim = ({ answer, keyword, options, highscore, onNext, onSuccess }) => {
   const [guess, setGuess] = useState(-1);
   const [canProceed, setCanProceed] = useState(false);
   const onClick = e => {
-    if (+guess === +answer && !canProceed) {
+    if (+guess === +answer) {
       onSuccess();
+      setGuess(-1);
     }
     setCanProceed(true);
   };
