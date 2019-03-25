@@ -14,7 +14,7 @@ export const populateOptions = options => ({
 });
 
 export const queryNextQuestion = () => dispatch => {
-  fetch("http://localhost:4200/next")
+  fetch("https://whim-backend.herokuapp.com/next")
     .then(res => res.json())
     .then(question => {
       console.log(question);
