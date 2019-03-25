@@ -65,8 +65,8 @@ app.get(
       const word = getRandomWord();
       console.log(`Selected word: ${word}`);
 
-      const relatedWords = await getAntonyms(word);
-      console.log(relatedWords);
+      const antonyms = await getAntonyms(word);
+      console.log(antonyms);
 
       result = { options: [], keyword: word, answer: 0 };
 
@@ -77,12 +77,8 @@ app.get(
         let picture = secretPicture[index];
         result.options.push(picture.link);
 
-        for (
-          let i = 0;
-          i < relatedWords.length && result.options.length < 4;
-          i++
-        ) {
-          const spamPictures = await getPhotos(relatedWords[i]);
+        for (let i = 0; i < antonyms.length && result.options.length < 4; i++) {
+          const spamPictures = await getPhotos(antonyms[i]);
 
           for (
             let j = 0;
