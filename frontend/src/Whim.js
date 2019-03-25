@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import "./Whim.css";
 
 const Whim = ({ answer, keyword, options, highscore, onNext, onSuccess }) => {
-  const [guess, setGuess] = useState();
+  const [guess, setGuess] = useState(-1);
+  const [canProceed, setCanProceed] = useState(false);
   const onClick = e => {
-    if (+guess === +answer) {
+    if (+guess === +answer && !canProceed) {
       onSuccess();
     }
+    setCanProceed(true);
   };
   return (
     <main>
@@ -25,8 +27,12 @@ const Whim = ({ answer, keyword, options, highscore, onNext, onSuccess }) => {
         </label>
       ))}
 
-      <button onClick={onClick}>Check</button>
-      <button onClick={onNext}>Next</button>
+      <button onClick={onClick} disabled={guess === -1}>
+        Check
+      </button>
+      <button onClick={onNext} disabled={!canProceed}>
+        Next
+      </button>
     </main>
   );
 };

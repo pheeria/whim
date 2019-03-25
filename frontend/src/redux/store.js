@@ -4,9 +4,13 @@ import reducer from "./reducers";
 import { queryNextQuestion } from "./actions";
 import { load, persist } from "./localStorage";
 
-const store = createStore(reducer, load(), applyMiddleware(thunk));
+const initialState = load();
+const store = createStore(reducer, initialState, applyMiddleware(thunk));
 
 store.subscribe(() => persist(store.getState()));
-store.dispatch(queryNextQuestion());
+
+if (!initialState) {
+  store.dispatch(queryNextQuestion());
+}
 
 export default store;
