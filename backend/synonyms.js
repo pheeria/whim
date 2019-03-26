@@ -2,7 +2,7 @@ const axios = require("axios");
 const secrets = require("./secrets");
 
 const synonyms = axios.create({
-  baseURL: secrets.synonyms.api,
+  baseURL: "http://www.stands4.com/services/v2/syno.php",
   timeout: 10000,
   params: {
     uid: secrets.synonyms.uid,

@@ -2,7 +2,7 @@ const axios = require("axios");
 const secrets = require("./secrets");
 
 const unsplash = axios.create({
-  baseURL: secrets.unsplash.api,
+  baseURL: "https://api.unsplash.com",
   timeout: 10000,
   params: {
     orientation: "squarish"
