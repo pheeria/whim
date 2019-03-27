@@ -1,5 +1,4 @@
 const axios = require("axios");
-const secrets = require("./secrets");
 
 const unsplash = axios.create({
   baseURL: "https://api.unsplash.com",
@@ -7,7 +6,7 @@ const unsplash = axios.create({
   params: {
     orientation: "squarish"
   },
-  headers: { Authorization: `Client-ID ${secrets.unsplash.appId}` }
+  headers: { Authorization: `Client-ID ${process.env.UNSPLASH_APPID}` }
 });
 
 const getPhotos = async word => {
