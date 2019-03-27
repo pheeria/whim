@@ -7,7 +7,11 @@ import { load, persist } from "./localStorage";
 const initialState = load();
 const store = createStore(reducer, initialState, applyMiddleware(thunk));
 
-store.subscribe(() => persist(store.getState()));
+store.subscribe(() => {
+  const state = store.getState();
+  console.log(state);
+  persist(state);
+});
 
 if (!initialState) {
   store.dispatch(queryNextQuestion());

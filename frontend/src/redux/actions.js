@@ -14,10 +14,13 @@ export const populateOptions = options => ({
 });
 
 export const queryNextQuestion = () => dispatch => {
-  fetch("https://whim-backend.herokuapp.com/next")
+  let api = "https://whim-backend.herokuapp.com/next";
+  if (process.env.NODE_ENV !== "production") {
+    api = "http://localhost:4200/next";
+  }
+  fetch(api)
     .then(res => res.json())
     .then(question => {
-      console.log(question);
       dispatch(setKeyword(question.keyword));
       dispatch(defineAnswer(question.answer));
       dispatch(populateOptions(question.options));

@@ -25,7 +25,6 @@ const getPhotos = async word => {
 const getThreeRandomPhotos = async () => {
   let result = [];
   const fromUnsplash = await unsplash.get(`/photos/random?count=3`);
-  console.log(fromUnsplash.data);
   for (let i = 0; i < fromUnsplash.data.length; i++) {
     let picture = fromUnsplash.data[i];
     result.push({
