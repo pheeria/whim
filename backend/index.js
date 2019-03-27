@@ -163,4 +163,6 @@ app.get("/:word", (req, res) => {
   });
 });
 
-app.listen(4200, () => console.log("Listening on port 4200!"));
+app.listen(process.env.PORT || 4200, () =>
+  console.log("Listening on port 4200!")
+);
