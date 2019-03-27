@@ -1,11 +1,22 @@
 const express = require("express");
-const cors = require("cors");
 const { unsplash, getPhotos, getThreeRandomPhotos } = require("./unsplash");
 const { getAntonyms } = require("./synonyms");
 const fs = require("fs");
 
 const app = express();
-app.use(cors());
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  res.set("Access-Control-Allow-Origin", origin);
+  res.set({
+    "Access-Control-Allow-Credentials": true,
+    "Access-Control-Allow-Methods": "POST",
+    "Access-Control-Allow-Headers":
+      "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  });
+  res.type("json");
+  res.status(200);
+  next();
+});
 
 const asyncHandler = fn => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);
