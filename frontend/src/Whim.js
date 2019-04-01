@@ -4,12 +4,20 @@ import "./Whim.css";
 const Whim = ({ answer, keyword, options, highscore, onNext, onSuccess }) => {
   const [guess, setGuess] = useState(-1);
   const [canProceed, setCanProceed] = useState(false);
+  const [checked, setChecked] = useState(true);
+
   const onClick = e => {
     if (+guess === +answer) {
       onSuccess();
       setGuess(-1);
     }
+    setChecked(false);
     setCanProceed(true);
+  };
+
+  const handleGuess = e => {
+    setGuess(e.target.value);
+    setChecked(true);
   };
   return (
     <main>
@@ -22,7 +30,8 @@ const Whim = ({ answer, keyword, options, highscore, onNext, onSuccess }) => {
             type="radio"
             name="answer"
             value={i}
-            onChange={e => setGuess(e.target.value)}
+            checked={+guess === i && checked}
+            onChange={handleGuess}
           />
           <img alt="" src={options[i]} />
         </label>

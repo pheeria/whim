@@ -16,11 +16,14 @@ input[type="radio"]:checked + img {
   outline: 2px solid #f00;
 }
 
+label {
+  overflow: hidden;
+}
+
 img {
   width: 100%;
   height: 300px;
   object-fit: none;
-  overflow: hidden;
 }
 
 main {
